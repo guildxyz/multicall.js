@@ -57,7 +57,7 @@ export function isEmpty(obj) {
   return !obj || Object.keys(obj).length === 0;
 }
 
-export async function ethCall(rawData, { id, web3, rpcUrl, block, multicallAddress, ws, wsResponseTimeout }) {
+export async function ethCall(rawData, { id, web3, rpcUrl, block, multicallAddress, ws, wsResponseTimeout, correlationId }) {
   const abiEncodedData = AGGREGATE_SELECTOR + strip0x(rawData);
   if (ws) {
     log('Sending via WebSocket');
@@ -100,12 +100,16 @@ export async function ethCall(rawData, { id, web3, rpcUrl, block, multicallAddre
     });
   } else {
     log('Sending via XHR fetch');
-    const rawResponse = await fetch(rpcUrl, {
-      method: 'POST',
-      headers: {
+    const headers {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
+    }
+    if (correlationId) {
+      headers['X-Correlation-ID'] = correlationId;
+    }
+    const rawResponse = await fetch(rpcUrl, {
+      method: 'POST',
+      headers,
       body: JSON.stringify({
         jsonrpc: '2.0',
         method: 'eth_call',
