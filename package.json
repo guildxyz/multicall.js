@@ -1,5 +1,5 @@
 {
-  "name": "@makerdao/multicall",
+  "name": "@jmezo/multicall",
   "version": "0.12.0",
   "description": "A blockchain state management library for dapps.",
   "contributors": [
@@ -12,13 +12,13 @@
     "multicall",
     "makerdao"
   ],
-  "homepage": "https://github.com/makerdao/multicall.js#readme",
+  "homepage": "https://github.com/jmezo/multicall.js#readme",
   "bugs": {
-    "url": "https://github.com/makerdao/multicall.js/issues"
+    "url": "https://github.com/jmezo/multicall.js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/makerdao/multicall.js.git"
+    "url": "https://github.com/jmezo/multicall.js.git"
   },
   "main": "dist/multicall.cjs.js",
   "types": "types/multicall.d.ts",
