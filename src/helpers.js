@@ -100,7 +100,7 @@ export async function ethCall(rawData, { id, web3, rpcUrl, block, multicallAddre
     });
   } else {
     log('Sending via XHR fetch');
-    const headers {
+    const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
