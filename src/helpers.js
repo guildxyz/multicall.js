@@ -124,7 +124,7 @@ export async function ethCall(rawData, { id, web3, rpcUrl, block, multicallAddre
       })
     });
     const content = await rawResponse.json();
-    if (!content || !content.result) {
+    if (!content?.toString() || !content.result) {
       throw new Error('Multicall received an empty response. Check your call configuration for errors.');
     }
     return content.result;
