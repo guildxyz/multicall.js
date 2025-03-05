@@ -24,10 +24,7 @@ export default [
   {
     input: 'src/index.js',
     output: { file: 'dist/multicall.cjs.js', format: 'cjs', indent: false, sourcemap: true },
-    external: makeExternalPredicate([
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {})
-    ]),
+    external: makeExternalPredicate([...Object.keys(pkg.dependencies || {})]),
     plugins: [
       json(),
       nodeResolve({
@@ -46,10 +43,7 @@ export default [
   {
     input: 'src/index.js',
     output: { file: 'dist/multicall.esm.js', format: 'es', indent: false, sourcemap: true },
-    external: makeExternalPredicate([
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {})
-    ]),
+    external: makeExternalPredicate([...Object.keys(pkg.dependencies || {})]),
     plugins: [
       json(),
       nodeResolve({
@@ -74,15 +68,20 @@ export default [
       json(),
       nodeResolve({
         extensions,
-        browser: true
-      }),
-      commonjs(),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('production')
+        browser: true,
       }),
       babel({
         extensions,
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
+        plugins: [
+          ['@babel/plugin-transform-runtime', { version: babelRuntimeVersion, useESModules: true }],
+          '@babel/plugin-proposal-optional-chaining'
+        ],
+        runtimeHelpers: true
+      }),
+      commonjs(),
+      replace({
+        'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       terser({
         compress: {
@@ -112,11 +111,16 @@ export default [
         extensions,
         browser: true
       }),
-      commonjs(),
       babel({
         extensions,
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
+        plugins: [
+          ['@babel/plugin-transform-runtime', { version: babelRuntimeVersion }],
+          '@babel/plugin-proposal-optional-chaining',
+        ],
+        runtimeHelpers: true
       }),
+      commonjs(),
       replace({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),

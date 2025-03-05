@@ -40,6 +40,7 @@
     "prepublishOnly": "yarn test && yarn clean && yarn build"
   },
   "dependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/runtime": "^7.7.4",
     "cross-fetch": "^3.0.4",
     "debug": "^4.1.1",
