@@ -16,6 +16,7 @@ module.exports = {
   ],
   plugins: [
     // don't use `loose` mode here - need to copy symbols when spreading
-    NODE_ENV === 'test' && '@babel/transform-modules-commonjs'
+    NODE_ENV === 'test' && '@babel/transform-modules-commonjs',
+    '@babel/plugin-proposal-optional-chaining'
   ].filter(Boolean)
 };
